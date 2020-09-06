@@ -1,4 +1,4 @@
-package com.vlados;
+package com.vlados.FirstLabLow;
 
 import org.junit.Test;
 import org.junit.Assert;

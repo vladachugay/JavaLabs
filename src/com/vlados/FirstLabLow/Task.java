@@ -1,4 +1,4 @@
-package com.vlados;
+package com.vlados.FirstLabLow;
 
 import java.util.ArrayList;
 
