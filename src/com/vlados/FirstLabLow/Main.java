@@ -9,7 +9,7 @@ public class Main {
     // На вхід поступає рядок із словами. На виході – масив String.
     public static void main(String[] args) {
     Task task = new Task();
-    System.out.println(Arrays.toString(task.filterwords("I love my husband  ооти ьоткрbdgvi")));
+    System.out.println(Arrays.toString(task.filterWords("I love my husband  ооти ьоткрbdgvi")));
 
     }
 }

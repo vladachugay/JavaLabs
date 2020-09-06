@@ -1,6 +1,8 @@
 package com.vlados.FirstLabLow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Task {
     private final String vowelLetters = "aeioyuAEIOYU";
@@ -39,14 +41,14 @@ public class Task {
         else return false;
     }
 
-    public String[] filterwords(String str) {
-        String[] words = str.split(" ");
-        ArrayList<String> result = new ArrayList<String>();
-        for (int i = 0; i < words.length; i++) {
-            if(checkForLatinLetters(words[i]) && checkForNumOfVowelLetters(words[i])) {
-                result.add(words[i]);
-            } else continue;
+    public String[] filterWords(String str) {
+        List<String> words = new ArrayList<String>(Arrays.asList(str.split(" ")));
+        for (int i = 0; i < words.size(); i++) {
+            if(!checkForLatinLetters(words.get(i)) || !checkForNumOfVowelLetters(words.get(i))) {
+               words.remove(i);
+               i--;
+            }
         }
-        return result.toArray(new String[0]);
+        return words.toArray(new String[0]);
     }
 }
