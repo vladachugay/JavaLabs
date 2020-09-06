@@ -6,27 +6,15 @@ import java.util.List;
 
 public class Task {
     private final String vowelLetters = "aeioyuAEIOYU";
-//    public String getString() {
-//        System.out.println("Enter words:");
-//        Scanner scanner = new Scanner(System.in);
-//        return scanner.nextLine();
-//    }
 
     public boolean checkForLatinLetters(String str) {
         str = str.trim();
-        for (int j = 0; j < str.length(); j++) {
+        for (int i = 0; i < str.length(); i++) {
             // за таблицею ASCII перевряємо, чи входить символ до латинського алфавіту
-            if (!((int) str.charAt(j) >= 65 && (int) str.charAt(j) <= 90) &&
-                    !((int) str.charAt(j) >= 97 && (int) str.charAt(j) <= 122)) {
-                return  false;
-            }
-            else {
-                if (j == str.length() - 1) {
-                    return true;
-                }
-            }
+            if (!((int) str.charAt(i) >= 65 && (int) str.charAt(i) <= 90) &&
+                    !((int) str.charAt(i) >= 97 && (int) str.charAt(i) <= 122)) return false;
         }
-        return false;
+        return true;
     }
 
     public boolean checkForNumOfVowelLetters(String str) {
@@ -38,11 +26,11 @@ public class Task {
              else consonantCounter++;
         }
         if (vowelCounter == consonantCounter) return true;
-        else return false;
+        return false;
     }
 
     public String[] filterWords(String str) {
-        List<String> words = new ArrayList<String>(Arrays.asList(str.split(" ")));
+        List<String> words = new ArrayList<>(Arrays.asList(str.split(" ")));
         for (int i = 0; i < words.size(); i++) {
             if(!checkForLatinLetters(words.get(i)) || !checkForNumOfVowelLetters(words.get(i))) {
                words.remove(i);
