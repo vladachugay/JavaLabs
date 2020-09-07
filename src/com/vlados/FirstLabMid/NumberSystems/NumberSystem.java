@@ -3,14 +3,19 @@ package com.vlados.FirstLabMid.NumberSystems;
 public class NumberSystem {
     private final char[] HEX_SYMBOLS  = {'A', 'B', 'C', 'D', 'E', 'F'};
 
-    private boolean isNumberCorrect(float num) {
-        return num >= 0 && (int)num == num;
+    private boolean isNumberCorrect(String strNum) {
+        try {
+            Integer.parseInt(strNum);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return Integer.parseInt(strNum) >= 0 ;
     }
 
-    public String toBinarySystem(float num) {
-        if(!isNumberCorrect(num)) throw new IllegalArgumentException("Number must be prime and positive");
+    public String toBinarySystem(String strNum) {
+        if(!isNumberCorrect(strNum)) throw new IllegalArgumentException("Number must be prime and positive");
         StringBuilder result = new StringBuilder();
-        int n = (int)num;
+        int n = Integer.parseInt(strNum);
         do {
             if(n%2 == 1) result.append("1");
             else result.append("0");
@@ -20,10 +25,10 @@ public class NumberSystem {
         return result.reverse().toString();
     }
 
-    public String toOctalSystem(float num) {
-        if(!isNumberCorrect(num)) throw new IllegalArgumentException("Number must be prime and positive");
+    public String toOctalSystem(String strNum) {
+        if(!isNumberCorrect(strNum)) throw new IllegalArgumentException("Number must be prime and positive");
         StringBuilder result = new StringBuilder();
-        int n = (int)num;
+        int n = Integer.parseInt(strNum);
         do {
             result.append(n%8);
             n/=8;
@@ -32,10 +37,10 @@ public class NumberSystem {
         return result.reverse().toString();
     }
 
-    public String toHexSystem(float num) {
-        if(!isNumberCorrect(num)) throw new IllegalArgumentException("Number must be prime and positive");
+    public String toHexSystem(String strNum) {
+        if(!isNumberCorrect(strNum)) throw new IllegalArgumentException("Number must be prime and positive");
         StringBuilder result = new StringBuilder();
-        int n = (int)num;
+        int n = Integer.parseInt(strNum);
         do {
             if(n % 16 <= 9) result.append(n%16);
             else {
