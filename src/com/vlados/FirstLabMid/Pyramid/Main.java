@@ -1,4 +1,4 @@
-package com.vlados.FirstLabMid.Part1;
+package com.vlados.FirstLabMid.Pyramid;
 
 public class Main {
     public static void main(String[] args) {
