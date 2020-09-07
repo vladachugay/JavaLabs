@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Task {
-    private final String vowelLetters = "aeioyuAEIOYU";
+    private final String VOWEL_LETTERS = "aeioyuAEIOYU";
 
     public boolean checkForLatinLetters(String str) {
         str = str.trim();
@@ -22,11 +22,10 @@ public class Task {
         int vowelCounter = 0;
         int consonantCounter = 0;
         for (int i = 0; i < str.length(); i++) {
-            if(vowelLetters.contains(String.valueOf(str.charAt(i)))) vowelCounter++;
+            if(VOWEL_LETTERS.contains(String.valueOf(str.charAt(i)))) vowelCounter++;
              else consonantCounter++;
         }
-        if (vowelCounter == consonantCounter) return true;
-        return false;
+        return vowelCounter == consonantCounter;
     }
 
     public String[] filterWords(String str) {

@@ -1,45 +1,48 @@
 package com.vlados.FirstLabMid.NumberSystems;
 
 public class NumberSystem {
-    private final char[] hexChars = {'A', 'B', 'C', 'D', 'E', 'F'};
+    private final char[] HEX_SYMBOLS  = {'A', 'B', 'C', 'D', 'E', 'F'};
 
-    private boolean isNumberCorrect(int num) {
-        return num >= 0;
+    private boolean isNumberCorrect(float num) {
+        return num >= 0 && (int)num == num;
     }
 
-    public String toBinarySystem(int num) {
+    public String toBinarySystem(float num) {
         if(!isNumberCorrect(num)) throw new IllegalArgumentException("Number must be prime and positive");
         StringBuilder result = new StringBuilder();
+        int n = (int)num;
         do {
-            if(num%2 == 1) result.append("1");
+            if(n%2 == 1) result.append("1");
             else result.append("0");
-            num/=2;
+            n/=2;
 
-        } while(num>=1);
+        } while(n>=1);
         return result.reverse().toString();
     }
 
-    public String toOctalSystem(int num) {
+    public String toOctalSystem(float num) {
         if(!isNumberCorrect(num)) throw new IllegalArgumentException("Number must be prime and positive");
         StringBuilder result = new StringBuilder();
+        int n = (int)num;
         do {
-            result.append(num%8);
-            num/=8;
+            result.append(n%8);
+            n/=8;
 
-        } while(num>=1);
+        } while(n>=1);
         return result.reverse().toString();
     }
 
-    public String toHexSystem(int num) {
+    public String toHexSystem(float num) {
         if(!isNumberCorrect(num)) throw new IllegalArgumentException("Number must be prime and positive");
         StringBuilder result = new StringBuilder();
+        int n = (int)num;
         do {
-            if(num % 16 <= 9) result.append(num%16);
+            if(n % 16 <= 9) result.append(n%16);
             else {
-                result.append(hexChars[(num%16) - 10]);
+                result.append(HEX_SYMBOLS[(n%16) - 10]);
             }
-            num/=16;
-        } while(num>=1);
+            n/=16;
+        } while(n>=1);
         return result.reverse().toString();
     }
 }
