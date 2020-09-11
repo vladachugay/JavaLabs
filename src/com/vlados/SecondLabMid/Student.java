@@ -1,61 +1,28 @@
 package com.vlados.SecondLabMid;
 
 import java.util.Date;
+import java.util.PrimitiveIterator;
 
 public class Student {
     private String surname;
     private String name;
     private Date dateOfBirth;
     private String telNum;
-    private static class Address {
-        private String street;
-        private int building;
-        private int flat;
+    private String street;
+    private int building;
+    private int flat;
 
-        Address(String street, int building, int flat) {
-            this.street = street;
-            this.building = building;
-            this.flat = flat;
-        }
 
-        public int getBuilding() {
-            return building;
-        }
-
-        public void setBuilding(int building) {
-            this.building = building;
-        }
-
-        public String getStreet() {
-            return street;
-        }
-
-        public void setStreet(String street) {
-            this.street = street;
-        }
-
-        public int getFlat() {
-            return flat;
-        }
-
-        public void setFlat(int flat) {
-            this.flat = flat;
-        }
-    }
-
-    Student(String surname, String name, Date dateOfBirth, String telNum) {
-        this.surname = surname;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.telNum = telNum;
-    }
+    Student() {}
 
     Student(String surname, String name, Date dateOfBirth, String telNum, String street, int building, int flat) {
         this.surname = surname;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.telNum = telNum;
-        Address address = new Address(street, building, flat);
+        this.street = street;
+        this.building = building;
+        this.flat = flat;
     }
 
 
@@ -89,6 +56,26 @@ public class Student {
 
     public void setTelNum(String telNum) {
         this.telNum = telNum;
+    }
+
+    public String getStreet() {
+        return this.street;
+    }
+
+    public int getBuilding() {
+        return this.building;
+    }
+
+    public int getFlat() {
+        return this.flat;
+    }
+
+    public void setStreet(int building) {
+        this.building = building;
+    }
+
+    public void setFlat(int flat) {
+        this.flat = flat;
     }
 
 }

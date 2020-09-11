@@ -10,8 +10,8 @@ public class Validator {
         return choice.trim().equals("1") || choice.trim().equals("2") || choice.trim().equals("3");
     }
 
-    public Boolean checkFullName(String str) {
-        return  str.trim().isEmpty();
+    public Boolean checkString(String str) {
+        return  !str.trim().isEmpty();
     }
 
     public Date checkDate(String dateStr) {
@@ -23,5 +23,16 @@ public class Validator {
             return null;
         }
         return date;
+    }
+
+    public int checkNumber(String string) {
+        int num;
+        try {
+            num = Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+        if(num >= 1) return num;
+        return 0;
     }
 }

@@ -26,9 +26,9 @@ public class TestTask {
 
     @Test
     public void testFilterWords() {
-        String[] expected = {"love", "my"};
-        String[] actual = task.filterWords("I love  my husband very much  ооти ьоткрbdgvi");
-        Assert.assertFalse(Arrays.equals(actual, expected));
+        String[] expected = {"like", "very"};
+        String[] actual = task.filterWords("I like very much  ооти ьоткрbdgvi");
+        Assert.assertTrue(Arrays.equals(actual, expected));
     }
 
 }

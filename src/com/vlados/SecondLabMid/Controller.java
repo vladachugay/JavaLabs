@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Controller {
     Validator validator = new Validator();
@@ -25,24 +26,33 @@ public class Controller {
                         break;
                     case "3": return;
                 }
+
             }
-            System.out.println("Помилка! Пункт меню вибраний невірно. Спробуйте ще раз.");
+            else {
+                System.out.println("Помилка! Пункт меню вибраний невірно. Спробуйте ще.");
+            }
         }
     }
 
     private String getUsersLine() {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     private void showMenu() {
-        System.out.print("Оберіть, що ви хочете зробити:");
+        System.out.println("Оберіть, що ви хочете зробити:");
         System.out.println("1. Додати запис до журналу куратора.");
         System.out.println("2. Показати всі записи.");
         System.out.println("3. Завершити роботу.");
     }
 
     private void addNewRecord() {
+        try {
+            students.add(new Student(getSurnameFromUser(),getNameFromUser(), getDateFromUser(), getTelNumFromUser(),
+                    getStreetFromUser(), getBuildingFromUser(), getFlatFromUser()));
+        } catch (Exception e) {
+            System.out.println("!!!!!!!!!!!!!!!!");
+        }
 
 
     }
@@ -54,7 +64,7 @@ public class Controller {
                 System.out.println("Прізвище: " + student.getSurname());
                 System.out.println("Ім'я: " + student.getName());
                 System.out.println("Дата народження" + formatter.format(student.getDateOfBirth()));
-                System.out.println("Адреса: вулиця ");                          // Пробл з адресою (nested static class)
+                System.out.println("Адреса: вулиця " + student.getStreet());                          // Пробл з адресою (nested static class)
             }
         }
     }
@@ -63,10 +73,10 @@ public class Controller {
         while (true) {
             System.out.println("Введіть прізвище студента: ");
             String surname = getUsersLine();
-            if(validator.checkFullName(surname)) {
+            if(validator.checkString(surname)) {
                 return surname;
             }
-            System.out.println("Помилка! Введено пустий рядок. Спробуйте ще раз.");
+            System.out.println("Помилка! Введено пустий рядок. Спробуйте ще.");
         }
     }
 
@@ -74,10 +84,10 @@ public class Controller {
         while (true) {
             System.out.println("Введіть ім'я студента: ");
             String name = getUsersLine();
-            if(validator.checkFullName(name)) {
+            if(validator.checkString(name)) {
                 return name;
             }
-            System.out.println("Помилка! Введено пустий рядок. Спробуйте ще раз.");
+            System.out.println("Помилка! Введено пустий рядок. Спробуйте ще.");
         }
     }
 
@@ -88,9 +98,62 @@ public class Controller {
             if(date != null) {
                 return date;
             }
-            System.out.println("Помилка! Невірний формат введення. Спробуйте ще раз.");
+            System.out.println("Помилка! Невірний формат введення. Спробуйте ще.");
         }
     }
+
+    private String getTelNumFromUser() {
+        String telNum;
+        while (true) {
+            System.out.println("Введіть номер телефону студента у форматі \"380...\"");
+            telNum = getUsersLine();
+            if(Pattern.matches("380\\d{9}", telNum)) {
+                return telNum;
+            }
+            System.out.println("Помилка! Невірний формат введення. Спробуйте ще.");
+        }
+    }
+
+    private String getStreetFromUser() {
+        String street;
+        while (true) {
+            System.out.println("Введіть адресу студента. Вулиця: ");
+            street = getUsersLine();
+            if(validator.checkString(street)) {
+                return street;
+            }
+            System.out.println("Помилка! Введено пустий рядок. Спробуйте ще.");
+        }
+    }
+
+    private int getBuildingFromUser() {
+        int building;
+        while (true) {
+            System.out.println("Будинок: ");
+            building = validator.checkNumber(getUsersLine());
+            if(building!= 0) {
+                return building;
+            }
+            System.out.println("Помилка! Невірний формат введення. Спробуйте ще.");
+        }
+    }
+
+    private int getFlatFromUser() {
+        int flat;
+        while (true) {
+            System.out.println("Квартира: ");
+            flat = validator.checkNumber(getUsersLine());
+            if(flat!= 0) {
+                return flat;
+            }
+            System.out.println("Помилка! Невірний формат введення. Спробуйте ще.");
+        }
+    }
+
+
+
+
+
 
 
 
