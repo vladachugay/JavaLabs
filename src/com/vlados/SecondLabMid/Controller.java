@@ -50,6 +50,7 @@ public class Controller {
         try {
             students.add(new Student(getSurnameFromUser(),getNameFromUser(), getDateFromUser(), getTelNumFromUser(),
                     getStreetFromUser(), getBuildingFromUser(), getFlatFromUser()));
+            System.out.println("Запис успішно добавлений.");
         } catch (Exception e) {
             System.out.println("!!!!!!!!!!!!!!!!");
         }
@@ -58,13 +59,15 @@ public class Controller {
     }
 
     private void showRecords() {
-        if (students.isEmpty()) System.out.println("В журналі немає жодних записів.");
+        if (students.isEmpty()) System.out.println("В журналі немає жодних записів.\n");
         else {
             for (Student student: students) {
                 System.out.println("Прізвище: " + student.getSurname());
                 System.out.println("Ім'я: " + student.getName());
-                System.out.println("Дата народження" + formatter.format(student.getDateOfBirth()));
-                System.out.println("Адреса: вулиця " + student.getStreet());                          // Пробл з адресою (nested static class)
+                System.out.println("Дата народження: " + formatter.format(student.getDateOfBirth()));
+                System.out.println("Адреса: вулиця " + student.getStreet() + ", будинок " + student.getBuilding() +
+                       ", квартира " + student.getFlat());
+                System.out.println("_______________________________________________");
             }
         }
     }
