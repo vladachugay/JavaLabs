@@ -54,8 +54,6 @@ public class Controller {
         } catch (Exception e) {
             System.out.println("!!!!!!!!!!!!!!!!");
         }
-
-
     }
 
     private void showRecords() {
@@ -152,13 +150,4 @@ public class Controller {
             System.out.println("Помилка! Невірний формат введення. Спробуйте ще.");
         }
     }
-
-
-
-
-
-
-
-
-
 }
