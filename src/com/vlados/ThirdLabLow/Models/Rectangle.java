@@ -22,7 +22,6 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public String toString() {
-        return "Rectangle (Area = " + this.calcArea() + "): side1 = " + sideA + " side2 = " + sideB;
+    public void draw() {
     }
 }

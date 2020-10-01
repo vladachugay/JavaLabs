@@ -13,14 +13,12 @@ public class Circle extends Shape{
         this.radius = radius;
     }
 
-
     @Override
     public float calcArea() {
         return (float)(Math.PI * radius * radius);
     }
 
     @Override
-    public String toString() {
-        return "Circle (Area = " + this.calcArea() + "): radius = " + radius;
+    public void draw() {
     }
 }

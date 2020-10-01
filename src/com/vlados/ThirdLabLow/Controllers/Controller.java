@@ -30,12 +30,5 @@ public class Controller {
         view.showMessage(View.COLOR_SORT);
         shapeService.sortByColor(shapeService.getShapes());
         view.showShapes(shapeService.getShapes());
-
-
     }
-
-
-
-
-
 }

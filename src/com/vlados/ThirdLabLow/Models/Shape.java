@@ -12,5 +12,9 @@ public abstract class Shape implements Drawable {
     }
 
     public abstract float calcArea();
-    public abstract String toString();
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "  area: " + this.calcArea() + "  color: " + this.getShapeColor();
+    }
 }

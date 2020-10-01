@@ -52,7 +52,4 @@ public class Service {
     public void sortByArea(Shape[] shapes) {
         Arrays.sort(shapes, new ShapeAreaComparator());
     }
-
-
-
 }

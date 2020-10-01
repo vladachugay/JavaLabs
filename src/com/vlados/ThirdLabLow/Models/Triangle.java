@@ -27,9 +27,6 @@ public class Triangle extends Shape{
     }
 
     @Override
-    public String toString() {
-        return "Triangle (Area = " + this.calcArea() + "):  side1 = " +
-                sideA + "  side2 = " + sideB + "  side3 = " + sideC;
-
+    public void draw() {
     }
 }

@@ -13,7 +13,7 @@ public class View {
 
     public void showShapes(Shape[] shapes) {
         for (Shape shape : shapes) {
-            System.out.println(shape.toString());
+            System.out.println(shape);
         }
         System.out.println();
     }
@@ -21,6 +21,4 @@ public class View {
     public void showMessage(String message) {
         System.out.println(message);
     }
-
-
 }
