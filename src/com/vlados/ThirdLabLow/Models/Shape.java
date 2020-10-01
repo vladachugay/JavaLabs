@@ -7,6 +7,10 @@ public abstract class Shape implements Drawable {
         this.shapeColor = shapeColor;
     }
 
+    public String getShapeColor() {
+        return shapeColor;
+    }
+
     public abstract float calcArea();
     public abstract String toString();
 }

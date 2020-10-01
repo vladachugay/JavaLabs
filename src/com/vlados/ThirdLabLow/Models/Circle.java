@@ -3,6 +3,11 @@ package com.vlados.ThirdLabLow.Models;
 public class Circle extends Shape{
     float radius;
 
+    Circle(float radius, String color) {
+        super(color);
+        this.radius = radius;
+    }
+
     Circle(float radius) {
         super("undefined");
         this.radius = radius;
@@ -16,6 +21,6 @@ public class Circle extends Shape{
 
     @Override
     public String toString() {
-        return "Circle: radius = " + radius ;
+        return "Circle (Area = " + this.calcArea() + "): radius = " + radius;
     }
 }

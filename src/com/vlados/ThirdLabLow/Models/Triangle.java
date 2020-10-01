@@ -5,6 +5,13 @@ public class Triangle extends Shape{
     float sideB;
     float sideC;
 
+    Triangle(float sideA, float sideB, float sideC, String color) {
+        super(color);
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.sideC = sideC;
+    }
+
     Triangle(float sideA, float sideB, float sideC) {
         super("undefined");
         this.sideA = sideA;
@@ -21,6 +28,8 @@ public class Triangle extends Shape{
 
     @Override
     public String toString() {
-        return "Triangle: side1 = " + sideA + " side2 = " + sideB + "side3 = " + sideC;
+        return "Triangle (Area = " + this.calcArea() + "):  side1 = " +
+                sideA + "  side2 = " + sideB + "  side3 = " + sideC;
+
     }
 }
