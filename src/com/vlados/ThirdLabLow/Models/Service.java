@@ -1,5 +1,8 @@
 package com.vlados.ThirdLabLow.Models;
 
+import com.vlados.ThirdLabLow.Models.Comparators.ShapeAreaComparator;
+import com.vlados.ThirdLabLow.Models.Comparators.ShapeColorComparator;
+
 import java.util.Arrays;
 
 public class Service {

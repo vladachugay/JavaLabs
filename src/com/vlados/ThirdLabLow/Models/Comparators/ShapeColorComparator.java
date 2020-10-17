@@ -1,4 +1,6 @@
-package com.vlados.ThirdLabLow.Models;
+package com.vlados.ThirdLabLow.Models.Comparators;
+
+import com.vlados.ThirdLabLow.Models.Shape;
 
 import java.util.Comparator;
 
