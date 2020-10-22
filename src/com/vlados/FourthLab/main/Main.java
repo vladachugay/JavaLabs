@@ -1,7 +1,7 @@
-package com.vlados.FourthLab;
+package com.vlados.FourthLab.main;
 
 public class Main {
     public static void main(String[] args) {
-        
+
     }
 }

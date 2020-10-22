@@ -1,4 +1,4 @@
-package com.vlados.FourthLab.Animals.Mammals;
+package com.vlados.FourthLab.main.Animals.Mammals;
 
 public class Lion extends Mammal {
 
