@@ -1,10 +1,12 @@
 package com.vlados.FourthLab.test;
 
 import com.vlados.FourthLab.main.Animals.Mammals.Lion;
+import com.vlados.FourthLab.main.Animals.Mammals.Mammal;
+import com.vlados.FourthLab.main.Animals.Mammals.Ungulates.Zebra;
 import com.vlados.FourthLab.main.Cages.LionCage;
+import com.vlados.FourthLab.main.Cages.MammalCage;
 import com.vlados.FourthLab.main.Zoo;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ZooTest {
@@ -17,6 +19,11 @@ public class ZooTest {
         lionCage.addAnimal(new Lion());
         lionCage.addAnimal(new Lion());
         zoo.addCage(lionCage);
+
+        MammalCage<Mammal> mammalCage = new MammalCage<>(10);
+        mammalCage.addAnimal(new Zebra());
+
+
         Assert.assertEquals(3, zoo.getCountOfAnimals());
     }
 
