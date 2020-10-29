@@ -16,8 +16,8 @@ public class Controller {
                 lines = ioService.getLines(getPath());
             }
             catch (IOException exception) {
-                System.out.println("Помилка при зчитуванні файлу: " + exception.getMessage());
-                System.out.println("Спробуйте ще раз");
+                System.err.println("Помилка при зчитуванні файлу: " + exception.getMessage());
+                System.err.println("Спробуйте ще раз");
                 continue;
             }
             isPathCorrect = true;
