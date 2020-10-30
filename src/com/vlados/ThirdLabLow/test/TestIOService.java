@@ -6,6 +6,7 @@ import com.vlados.ThirdLabLow.main.models.shapes.impl.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class TestIOService {
         expectedShapes.add(new Rectangle(12f, 4f, "green"));
         expectedShapes.add(new Triangle(3f, 4f, 5f, "blue"));
 
-        String file = "C:\\Users\\ConnecT\\Desktop\\testIO\\obj.ser";
+        File file = new File("C:\\Users\\ConnecT\\Desktop\\testIO", "obj.ser");
         ioService.writeShapes(expectedShapes, file);
         List<Shape> actualShape = ioService.readShapes(file);
 

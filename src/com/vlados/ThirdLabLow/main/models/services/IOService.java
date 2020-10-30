@@ -8,7 +8,7 @@ import java.util.List;
 
 public class IOService {
 
-    public void writeShapes(List<Shape> shapes, String file) {
+    public void writeShapes(List<Shape> shapes, File file) {
         try(ObjectOutput objectOutput = new ObjectOutputStream(new FileOutputStream(file))) {
             for (Shape shape: shapes) {
                 objectOutput.writeObject(shape);
@@ -18,7 +18,7 @@ public class IOService {
         }
     }
 
-    public List<Shape> readShapes(String file){
+    public List<Shape> readShapes(File file){
         List<Shape> shapes = new ArrayList<>();
         try(ObjectInput objectInput = new ObjectInputStream(new FileInputStream(file))) {
             while (true) {

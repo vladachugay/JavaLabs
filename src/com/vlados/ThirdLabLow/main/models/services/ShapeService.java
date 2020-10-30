@@ -60,4 +60,16 @@ public class ShapeService {
     public void sortByArea(List<Shape> shapes) {
         shapes.sort(new ShapeAreaComparator());
     }
+
+    public void addCircle(float radius, String color) {
+        shapes.add(new Circle(radius, color));
+    }
+
+    public void addTriangle(float sideA, float sideB, float sideC, String color) {
+        shapes.add(new Triangle(sideA, sideB, sideC, color));
+    }
+
+    public void addRectangle(float sideA, float sideB, String color) {
+        shapes.add(new Rectangle(sideA, sideB, color));
+    }
 }
