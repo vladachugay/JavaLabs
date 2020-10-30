@@ -9,7 +9,7 @@ public class Validator {
     }
 
     public String checkString(String s) throws IllegalArgumentException{
-        if(s.trim().isEmpty()) throw new IllegalArgumentException();
-        return s.trim();
+        if(s.isEmpty()) throw new IllegalArgumentException();
+        return s;
     }
 }

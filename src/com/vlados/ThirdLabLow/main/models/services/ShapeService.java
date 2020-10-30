@@ -12,8 +12,11 @@ import java.util.List;
 
 public class ShapeService {
     List<Shape> shapes = new ArrayList<>();
+    public List<Shape> getShapes() {
+        return this.shapes;
+    }
 
-    {
+    public void autofill() {
        shapes.add(new Circle(20, "Red"));
        shapes.add(new Rectangle(2, 3, "Blue"));
        shapes.add(new Triangle(3,4,5, "Green"));
@@ -31,10 +34,6 @@ public class ShapeService {
        shapes.add(new Triangle(38,41,55, "Beige"));
 
     }
-    public List<Shape> getShapes() {
-        return this.shapes;
-    }
-
 
     public float sumAreaForAllShapes() {
         float sumArea = 0;

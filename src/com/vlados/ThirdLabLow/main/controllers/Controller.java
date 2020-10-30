@@ -13,36 +13,30 @@ public class Controller {
     private static final Validator validator = new Validator();
 
     public void start() {
-//        view.showMessage(View.MAIN_MENU);
-//        String choice = view.getUsersLine();
-//        switch (choice.trim()) {
-//            case "1":
-//
-//        }
-
-
-//        view.showMessage(View.ALL_SHAPES);
-//        view.showShapes(shapeService.getShapes());
-//
-//        view.showMessage(View.SUM_AREA);
-//        view.showMessage(String.valueOf(shapeService.sumAreaForAllShapes()));
-//
-//        view.showMessage(View.SUM_AREA_CIRCLE);
-//        view.showMessage(String.valueOf(shapeService.sumAreaForSomeShapes("Circle")));
-//
-//        view.showMessage(View.SUM_AREA_RECTANGLE);
-//        view.showMessage(String.valueOf(shapeService.sumAreaForSomeShapes("Rectangle")));
-//
-//        view.showMessage(View.SUM_AREA_TRIANGLE);
-//        view.showMessage(String.valueOf(shapeService.sumAreaForSomeShapes("Triangle")));
-//
-//        view.showMessage(View.AREA_SORT);
-//        shapeService.sortByArea(shapeService.getShapes());
-//        view.showShapes(shapeService.getShapes());
-//
-//        view.showMessage(View.COLOR_SORT);
-//        shapeService.sortByColor(shapeService.getShapes());
-//        view.showShapes(shapeService.getShapes());
+        view.showMessage(View.MAIN_MENU);
+        String choice = view.getUsersLine();
+        switch (choice.trim()) {
+            case "1" -> this.addShape(this.getTypeFromUser());
+            case "2" -> shapeService.autofill();
+            case "3" -> view.showShapes(shapeService.getShapes());
+            case "4" -> {
+                view.showMessage(View.SUM_AREA);
+                view.showMessage(String.valueOf(shapeService.sumAreaForAllShapes()));
+            }
+            case "5" -> this.sumAreaForType(getTypeFromUser());
+            case "6" -> {
+                shapeService.sortByArea(shapeService.getShapes());
+                view.showShapes(shapeService.getShapes());
+            }
+            case "7" -> {
+                shapeService.sortByColor(shapeService.getShapes());
+                view.showShapes(shapeService.getShapes());
+            }
+            case "8" -> this.saveShapesToFile();//save shapes to file
+            case "9" -> this.readShapesFromFile();//read shapes from file
+            case "10" -> System.exit(1);
+            default -> view.showMessage(View.INCORRECT_INPUT);
+        }
     }
 
     public void addShape(String type) {
@@ -97,6 +91,7 @@ public class Controller {
                 }
                 shapeService.addCircle(side, getColorFromUser());
             }
+            default -> view.showMessage(View.INCORRECT_INPUT);
         }
     }
 
@@ -113,5 +108,49 @@ public class Controller {
             break;
         }
         return color;
+    }
+
+    public String getTypeFromUser() {
+        String type;
+        view.showMessage(View.INVITATION_TO_ENTER_TYPE);
+        while (true) {
+            try {
+                type = validator.checkString(view.getUsersLine()).toLowerCase();
+                if (!type.equalsIgnoreCase("triangle") && !type.equalsIgnoreCase("rectangle")
+                    && !type.equalsIgnoreCase("circle")) {
+                    throw new IllegalArgumentException();
+                }
+            } catch (IllegalArgumentException exception) {
+                view.showMessage(View.INCORRECT_INPUT);
+                continue;
+            }
+            break;
+        }
+        return type;
+    }
+
+    public void sumAreaForType(String type) {
+        switch (type) {
+            case "circle" -> {
+                view.showMessage(View.SUM_AREA_CIRCLE);
+                view.showMessage(String.valueOf(shapeService.sumAreaForSomeShapes("Circle")));
+            }
+            case "triangle" -> {
+                view.showMessage(View.SUM_AREA_TRIANGLE);
+                view.showMessage(String.valueOf(shapeService.sumAreaForSomeShapes("Triangle")));
+            }
+            case "rectangle" -> {
+                view.showMessage(View.SUM_AREA_RECTANGLE);
+                view.showMessage(String.valueOf(shapeService.sumAreaForSomeShapes("Rectangle")));
+            }
+        }
+    }
+
+    public void saveShapesToFile() {
+
+    }
+
+    public void readShapesFromFile() {
+
     }
 }
