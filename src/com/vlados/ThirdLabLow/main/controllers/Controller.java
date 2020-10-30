@@ -13,29 +13,31 @@ public class Controller {
     private static final Validator validator = new Validator();
 
     public void start() {
-        view.showMessage(View.MAIN_MENU);
-        String choice = view.getUsersLine();
-        switch (choice.trim()) {
-            case "1" -> this.addShape(this.getTypeFromUser());
-            case "2" -> shapeService.autofill();
-            case "3" -> view.showShapes(shapeService.getShapes());
-            case "4" -> {
-                view.showMessage(View.SUM_AREA);
-                view.showMessage(String.valueOf(shapeService.sumAreaForAllShapes()));
+        while (true) {
+            view.showMessage(View.MAIN_MENU);
+            String choice = view.getUsersLine();
+            switch (choice.trim()) {
+                case "1" -> this.addShape(this.getTypeFromUser());
+                case "2" -> shapeService.autofill();
+                case "3" -> view.showShapes(shapeService.getShapes());
+                case "4" -> {
+                    view.showMessage(View.SUM_AREA);
+                    view.showMessage(String.valueOf(shapeService.sumAreaForAllShapes()));
+                }
+                case "5" -> this.sumAreaForType(getTypeFromUser());
+                case "6" -> {
+                    shapeService.sortByArea(shapeService.getShapes());
+                    view.showShapes(shapeService.getShapes());
+                }
+                case "7" -> {
+                    shapeService.sortByColor(shapeService.getShapes());
+                    view.showShapes(shapeService.getShapes());
+                }
+                case "8" -> this.saveShapesToFile();//save shapes to file
+                case "9" -> this.readShapesFromFile();//read shapes from file
+                case "10" -> System.exit(1);
+                default -> view.showMessage(View.INCORRECT_INPUT);
             }
-            case "5" -> this.sumAreaForType(getTypeFromUser());
-            case "6" -> {
-                shapeService.sortByArea(shapeService.getShapes());
-                view.showShapes(shapeService.getShapes());
-            }
-            case "7" -> {
-                shapeService.sortByColor(shapeService.getShapes());
-                view.showShapes(shapeService.getShapes());
-            }
-            case "8" -> this.saveShapesToFile();//save shapes to file
-            case "9" -> this.readShapesFromFile();//read shapes from file
-            case "10" -> System.exit(1);
-            default -> view.showMessage(View.INCORRECT_INPUT);
         }
     }
 
@@ -153,4 +155,5 @@ public class Controller {
     public void readShapesFromFile() {
 
     }
+
 }

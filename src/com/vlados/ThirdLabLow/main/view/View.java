@@ -18,11 +18,11 @@ public class View {
     public static final String INVITATION_TO_ENTER_RECTANGLE = "Enter 2 sides of the rectangle using enter:";
     public static final String INVITATION_TO_ENTER_COLOR = "Enter color of the shape:";
     public static final String INVITATION_TO_ENTER_TYPE = "Enter type of the shape(circle, rectangle or triangle):";
-    public static final String INCORRECT_INPUT = "The number is not correct.\n" +
+    public static final String INCORRECT_INPUT = "Your input is not correct.\n" +
             "Try again:\n";
     public static final String MAIN_MENU = "Select the option:\n" +
             "1. Add new shape\n" +
-            "2. Autofill" +
+            "2. Autofill\n" +
             "3. Show all shapes\n" +
             "4. Calculate amount of area for all shapes\n" +
             "5. Calculate amount of area for some type of shape\n" +
