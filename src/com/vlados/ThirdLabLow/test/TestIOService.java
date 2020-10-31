@@ -22,7 +22,8 @@ public class TestIOService {
 
         File file = new File("C:\\Users\\ConnecT\\Desktop\\testIO", "obj.ser");
         ioService.writeShapes(expectedShapes, file);
-        List<Shape> actualShape = ioService.readShapes(file);
+        List<Shape> actualShape = new ArrayList<>();
+        ioService.readShapes(file, actualShape);
 
         Assert.assertEquals(expectedShapes, actualShape);
     }

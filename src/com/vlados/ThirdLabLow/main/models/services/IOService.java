@@ -18,8 +18,7 @@ public class IOService {
         }
     }
 
-    public List<Shape> readShapes(File file){
-        List<Shape> shapes = new ArrayList<>();
+    public List<Shape> readShapes(File file, List<Shape> shapes){
         try(ObjectInput objectInput = new ObjectInputStream(new FileInputStream(file))) {
             while (true) {
                 try {
@@ -34,5 +33,4 @@ public class IOService {
         }
         return shapes;
     }
-
 }

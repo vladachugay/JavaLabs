@@ -3,7 +3,6 @@ package com.vlados.ThirdLabLow.main.view;
 import com.vlados.ThirdLabLow.main.models.shapes.Shape;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class View {
     public static final String ALL_SHAPES = "All shapes:";
@@ -18,8 +17,11 @@ public class View {
     public static final String INVITATION_TO_ENTER_RECTANGLE = "Enter 2 sides of the rectangle using enter:";
     public static final String INVITATION_TO_ENTER_COLOR = "Enter color of the shape:";
     public static final String INVITATION_TO_ENTER_TYPE = "Enter type of the shape(circle, rectangle or triangle):";
+    public static final String INVITATION_TO_ENTER_FILE_LOCATION = "Enter the file location (path):";
+    public static final String INVITATION_TO_ENTER_FILENAME = "Enter the filename:";
+    public static final String INCORRECT_FILE = "This file doesn't exist.\n";
     public static final String INCORRECT_INPUT = "Your input is not correct.\n" +
-            "Try again:\n";
+            "Try again:";
     public static final String MAIN_MENU = "Select the option:\n" +
             "1. Add new shape\n" +
             "2. Autofill\n" +
@@ -33,6 +35,7 @@ public class View {
             "10. Exit";
 
     public void showShapes(List<Shape> shapes) {
+        if(shapes.isEmpty()) System.out.println("This list is empty.");
         for (Shape shape : shapes) {
             System.out.println(shape);
         }
@@ -41,10 +44,5 @@ public class View {
 
     public void showMessage(String message) {
         System.out.println(message);
-    }
-
-    public String getUsersLine() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine().trim();
     }
 }

@@ -1,5 +1,6 @@
 package com.vlados.ThirdLabLow.main.controllers;
 import com.vlados.ThirdLabLow.main.models.Validator;
+import com.vlados.ThirdLabLow.main.models.services.IOService;
 import com.vlados.ThirdLabLow.main.models.services.ShapeService;
 import com.vlados.ThirdLabLow.main.view.RetrieveInfo;
 import com.vlados.ThirdLabLow.main.view.View;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class Controller {
     private static final ShapeService shapeService = new ShapeService();
+    private static final IOService ioservice = new IOService();
     private static final View view = new View();
     private static final Validator validator = new Validator();
     private static final RetrieveInfo info = new RetrieveInfo();
@@ -17,7 +19,7 @@ public class Controller {
     public void start() {
         while (true) {
             view.showMessage(View.MAIN_MENU);
-            String choice = view.getUsersLine();
+            String choice = info.retrieveUsersLine();
             switch (choice.trim()) {
                 case "1" -> this.addShape(info.retrieveType());
                 case "2" -> shapeService.autofill();
@@ -35,8 +37,8 @@ public class Controller {
                     shapeService.sortByColor(shapeService.getShapes());
                     view.showShapes(shapeService.getShapes());
                 }
-                case "8" -> this.saveShapesToFile();//save shapes to file
-                case "9" -> this.readShapesFromFile();//read shapes from file
+                case "8" -> ioservice.writeShapes(shapeService.getShapes(), info.retrieveFile());
+                case "9" -> ioservice.readShapes(info.retrieveFile(), shapeService.getShapes());
                 case "10" -> System.exit(1);
                 default -> view.showMessage(View.INCORRECT_INPUT);
             }
@@ -52,7 +54,7 @@ public class Controller {
                 while (sides.size() < 3) {
                     while (true) {
                         try {
-                            side = validator.checkNumber(view.getUsersLine());
+                            side = validator.checkNumber(info.retrieveUsersLine());
                         } catch (IllegalArgumentException exception) {
                             view.showMessage(View.INCORRECT_INPUT);
                             continue;
@@ -70,7 +72,7 @@ public class Controller {
                 while (sides.size() < 2) {
                     while (true) {
                         try {
-                            side = validator.checkNumber(view.getUsersLine());
+                            side = validator.checkNumber(info.retrieveUsersLine());
                         } catch (IllegalArgumentException exception) {
                             view.showMessage(View.INCORRECT_INPUT);
                             continue;
@@ -86,7 +88,7 @@ public class Controller {
                 view.showMessage(View.INVITATION_TO_ENTER_CIRCLE);
                 while (true) {
                     try {
-                        side = validator.checkNumber(view.getUsersLine());
+                        side = validator.checkNumber(info.retrieveUsersLine());
                     } catch (IllegalArgumentException exception) {
                         view.showMessage(View.INCORRECT_INPUT);
                         continue;
@@ -116,13 +118,4 @@ public class Controller {
             }
         }
     }
-
-    public void saveShapesToFile() {
-
-    }
-
-    public void readShapesFromFile() {
-
-    }
-
 }
