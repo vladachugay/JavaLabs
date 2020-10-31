@@ -1,6 +1,7 @@
 package com.vlados.ThirdLabLow.main.controllers;
 import com.vlados.ThirdLabLow.main.models.Validator;
 import com.vlados.ThirdLabLow.main.models.services.ShapeService;
+import com.vlados.ThirdLabLow.main.view.RetrieveInfo;
 import com.vlados.ThirdLabLow.main.view.View;
 
 import java.util.ArrayList;
@@ -11,20 +12,21 @@ public class Controller {
     private static final ShapeService shapeService = new ShapeService();
     private static final View view = new View();
     private static final Validator validator = new Validator();
+    private static final RetrieveInfo info = new RetrieveInfo();
 
     public void start() {
         while (true) {
             view.showMessage(View.MAIN_MENU);
             String choice = view.getUsersLine();
             switch (choice.trim()) {
-                case "1" -> this.addShape(this.getTypeFromUser());
+                case "1" -> this.addShape(info.retrieveType());
                 case "2" -> shapeService.autofill();
                 case "3" -> view.showShapes(shapeService.getShapes());
                 case "4" -> {
                     view.showMessage(View.SUM_AREA);
                     view.showMessage(String.valueOf(shapeService.sumAreaForAllShapes()));
                 }
-                case "5" -> this.sumAreaForType(getTypeFromUser());
+                case "5" -> this.sumAreaForType(info.retrieveType());
                 case "6" -> {
                     shapeService.sortByArea(shapeService.getShapes());
                     view.showShapes(shapeService.getShapes());
@@ -59,7 +61,7 @@ public class Controller {
                         break;
                     }
                 }
-                shapeService.addTriangle(sides.get(0), sides.get(1), sides.get(2), this.getColorFromUser());
+                shapeService.addTriangle(sides.get(0), sides.get(1), sides.get(2), info.retrieveColor());
                 sides.clear();
             }
             case "rectangle" -> {
@@ -77,7 +79,7 @@ public class Controller {
                         break;
                     }
                 }
-                shapeService.addRectangle(sides.get(0), sides.get(1), this.getColorFromUser());
+                shapeService.addRectangle(sides.get(0), sides.get(1), info.retrieveColor());
                 sides.clear();
             }
             case "circle" -> {
@@ -91,45 +93,12 @@ public class Controller {
                     }
                     break;
                 }
-                shapeService.addCircle(side, getColorFromUser());
+                shapeService.addCircle(side, info.retrieveColor());
             }
             default -> view.showMessage(View.INCORRECT_INPUT);
         }
     }
 
-    public String getColorFromUser() {
-        String color;
-        view.showMessage(View.INVITATION_TO_ENTER_COLOR);
-        while (true) {
-            try {
-                color = validator.checkString(view.getUsersLine());
-            } catch (IllegalArgumentException exception) {
-                view.showMessage(View.INCORRECT_INPUT);
-                continue;
-            }
-            break;
-        }
-        return color;
-    }
-
-    public String getTypeFromUser() {
-        String type;
-        view.showMessage(View.INVITATION_TO_ENTER_TYPE);
-        while (true) {
-            try {
-                type = validator.checkString(view.getUsersLine()).toLowerCase();
-                if (!type.equalsIgnoreCase("triangle") && !type.equalsIgnoreCase("rectangle")
-                    && !type.equalsIgnoreCase("circle")) {
-                    throw new IllegalArgumentException();
-                }
-            } catch (IllegalArgumentException exception) {
-                view.showMessage(View.INCORRECT_INPUT);
-                continue;
-            }
-            break;
-        }
-        return type;
-    }
 
     public void sumAreaForType(String type) {
         switch (type) {
