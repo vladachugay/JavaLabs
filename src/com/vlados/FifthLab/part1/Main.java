@@ -1,4 +1,4 @@
-package com.vlados.FifthLab.Part1;
+package com.vlados.FifthLab.part1;
 
 public class Main {
 

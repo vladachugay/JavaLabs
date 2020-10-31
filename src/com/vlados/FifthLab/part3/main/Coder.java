@@ -1,4 +1,4 @@
-package com.vlados.FifthLab.Part3;
+package com.vlados.FifthLab.part3.main;
 
 import java.io.*;
 
@@ -7,8 +7,7 @@ public class Coder {
     public void encrypt(String text, File file, char key) {
         try(EncodingWriter writer = new EncodingWriter(new FileWriter(file))) {
             for(char c : text.toCharArray()) {
-                writer.write((int)c, key);
-                System.out.println((int)c);
+                writer.write(c, key);
             }
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
@@ -21,7 +20,6 @@ public class Coder {
         try(EncodingReader reader = new EncodingReader(new FileReader(file))) {
             c = reader.read(key);
             while (c + (int)key != -1) {
-                System.out.println(c);
                 sb.append((char)c);
                 c = reader.read(key);
             }
