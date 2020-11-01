@@ -9,7 +9,7 @@ public class Dictionary {
     private Map<String, String> dictionary = new HashMap<>();
 
     {
-        dictionary.put("I", "я");
+        dictionary.put("i", "я");
         dictionary.put("love", "любити");
         dictionary.put("walk", "ходити");
         dictionary.put("you", "ти");
@@ -17,7 +17,7 @@ public class Dictionary {
     }
 
     public void addWord(String engWord, String ukrWord) {
-        dictionary.put(engWord, ukrWord);
+        dictionary.put(engWord.toLowerCase(), ukrWord.toLowerCase());
     }
 
     public String translate(String engText) {
