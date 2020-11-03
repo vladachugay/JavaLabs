@@ -10,6 +10,9 @@ public class Dictionary {
 
     {
         dictionary.put("i", "я");
+        dictionary.put("cat", "кіт");
+        dictionary.put("dog", "собака");
+        dictionary.put("building", "будівля");
         dictionary.put("love", "любити");
         dictionary.put("walk", "ходити");
         dictionary.put("you", "ти");

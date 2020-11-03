@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class Controller {
+public class Lambda {
 
-    public String lambda(String str) {
+    public String find(String str) {
 
         return Stream.of(str.split(" ")).min(Comparator.comparingInt(s -> Stream.of(s.split(""))
                 .collect(Collectors.toSet()).size())).orElseThrow();
