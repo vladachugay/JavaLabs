@@ -1,5 +1,8 @@
-package workshop.task_3_1;
+package com.vlados.lab7hard.test.task_3_1;
 
+import com.vlados.lab7hard.main.task_3_1.BestPriceFinder;
+import com.vlados.lab7hard.main.task_3_1.ProductPrice;
+import com.vlados.lab7hard.main.task_3_1.Shop;
 import org.junit.Test;
 
 import java.util.Arrays;
