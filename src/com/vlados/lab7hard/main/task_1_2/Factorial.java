@@ -11,6 +11,5 @@ public class Factorial {
 
     public static long factorial(long i) {
         return Stream.iterate(1, n -> n + 1).limit(i).reduce((x, y) -> x * y).orElseThrow();
-
     }
 }
