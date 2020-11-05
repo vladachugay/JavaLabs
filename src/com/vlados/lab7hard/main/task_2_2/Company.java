@@ -65,6 +65,6 @@ public class Company {
     }
 
     public Customer getCustomerNamed(String name) {
-        throw new NotImplementedException();
+        return this.getCustomers().stream().filter( c -> c.getName().equals(name)).findFirst().orElseThrow();
     }
 }

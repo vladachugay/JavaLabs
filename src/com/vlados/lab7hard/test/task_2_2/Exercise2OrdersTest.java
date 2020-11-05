@@ -1,6 +1,7 @@
 package com.vlados.lab7hard.test.task_2_2;
 
 import com.vlados.lab7hard.main.task_2_2.Customer;
+import com.vlados.lab7hard.main.task_2_2.Order;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,8 +11,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -25,9 +25,11 @@ public class Exercise2OrdersTest extends CompanyDomain
     @Test
     public void totalOrderValuesByCity()
     {
-        // implement customer.getTotalOrderValue() for this exercise;
+        // implement customer.getTotalOrderValue() for this exercise (DONE);
 
-        Map<String, Double> map = null;
+        Map<String, Double> map = company.getCustomers()
+                .stream()
+                .collect(Collectors.groupingBy(Customer::getCity, summingDouble(Customer::getTotalOrderValue)));
 
         assertEquals(2, map.size());
         assertEquals(446.25, map.get("London"), 0.0);
@@ -42,7 +44,11 @@ public class Exercise2OrdersTest extends CompanyDomain
     @Test
     public void mostExpensiveItem()
     {
-        Map<Double, List<Customer>> map = null;
+        Map<Double, List<Customer>> map = company.getCustomers()
+                .stream()
+                .collect(Collectors.groupingBy(Customer::getMostExpensiveItemValue));
+
+
 
         Assert.assertEquals(2, map.size());
         Assert.assertEquals(2, map.entrySet().size());
@@ -52,7 +58,4 @@ public class Exercise2OrdersTest extends CompanyDomain
                         this.company.getCustomerNamed("Bill")),
                 map.get(50.0));
     }
-
-
-
 }
