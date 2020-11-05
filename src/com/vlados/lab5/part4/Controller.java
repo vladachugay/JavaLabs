@@ -70,10 +70,11 @@ public class Controller {
     }
 
     public void sortByName(Map<String, Integer> unsortedMap) {
+
         Map<String, Integer> result = unsortedMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+                        (item1, item2) -> item1, LinkedHashMap::new));
         System.out.println(result);
     }
 
@@ -81,7 +82,7 @@ public class Controller {
         Map<String, Integer> result = unsortedMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+                        (item1, item2) -> item1, LinkedHashMap::new));
         System.out.println(result);
     }
 }
