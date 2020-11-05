@@ -5,6 +5,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by olenasyrota on 6/28/16.
@@ -35,11 +36,14 @@ public class Company {
     public List<Order> getOrders() {
         assert (false);// Refactor this code to use lambdas
 
-        List<Order> orders = new ArrayList<Order>();
-        for (Customer customer : this.customers) {
-            orders.addAll(customer.getOrders());
-        }
-        return orders;
+//        List<Order> orders = new ArrayList<Order>();
+//        for (Customer customer : this.customers) {
+//            orders.addAll(customer.getOrders());
+//        }
+        return this.customers.stream()
+                .map(customer -> customer.getOrders())
+                .flatMap(orders -> orders.stream())
+                .collect(Collectors.toList());
     }
 
     public Customer getMostRecentCustomer() {

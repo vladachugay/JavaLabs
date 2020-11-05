@@ -4,6 +4,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
 /**
@@ -49,11 +50,13 @@ public class Order {
 
     public double getValue() {
         // get total of all lineItems
-        throw new NotImplementedException();
+        return lineItems.stream()
+                .mapToDouble(i -> i.getValue() * i.getQuantity())
+                .sum();
     }
 
     public double getMostExpensiveItemValue() {
         // get value of the most expensive item
-        throw new NotImplementedException();
+        return lineItems.stream().mapToDouble(i -> i.getValue()).max().orElse(0);
     }
 }
