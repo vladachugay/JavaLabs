@@ -1,82 +1,38 @@
 package com.vlados.lab8;
 
 import java.util.Scanner;
+import java.util.concurrent.ForkJoinPool;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
-        new Task().spam();
-    }
-}
-
-class MyThread extends Thread {
-
-    long time;
-    String msg;
-
-    MyThread(String msg, long time) {
-        this.time = time;
-        this.msg = msg;
-    }
-
-    @Override
-    public void run() {
-        while(!isInterrupted()) {
-            try {
-                sleep(time);
-                System.out.println(msg);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
-                interrupt();
-            }
+    public static void main(String[] args) {
+        int [] arr = new int[1_000_000];
+        for(int i = 0; i < arr.length; i++) {
+            arr[i] = (int)(Math.random() * 100);
         }
-    }
-}
 
-class CheckThread extends Thread {
-    MyThread[] threads;
-    Scanner scanner = new Scanner(System.in);
+        long startForkJoin = System.currentTimeMillis();
 
-    CheckThread(MyThread[] threads) {
-        this.threads = threads;
-    }
+        ForkJoinPool forkJoinPool = new ForkJoinPool(10);
+        long forkJoinResult = forkJoinPool.invoke(new Task(arr));
 
-    @Override
-    public void run() {
-        while (true) {
-            if (scanner.nextLine().toLowerCase().trim().equals("")) {
-                for (MyThread thread : threads) {
-                    thread.interrupt();
-                }
-                break;
-            }
+        long endForkJoin = System.currentTimeMillis();
+        long timeForkJoin = endForkJoin - startForkJoin;
+
+        long startOneThread = System.currentTimeMillis();
+
+        long oneThreadResult = 0;
+        for (int j : arr) {
+            oneThreadResult += j;
         }
+
+        long endOneThread = System.currentTimeMillis();
+        long timeOneThread = endOneThread - startOneThread;
+
+        System.out.println("One thread result: " + oneThreadResult + "\t\ttime = " + timeOneThread);
+        System.out.println("ForkJoin result: " + forkJoinResult + "\t\ttime = " + timeForkJoin);
     }
 }
 
 
-
-class Task{
-    Scanner scanner = new Scanner(System.in);
-    MyThread[] threads = new MyThread[3];
-    long[] time = new long[threads.length];
-    String[] msg = new String[threads.length];
-
-    public void spam() {
-
-        for (int i = 0; i < threads.length; i++) {
-            msg[i] = scanner.nextLine();
-        }
-
-        for (int i = 0; i < threads.length; i++) {
-            time[i] = scanner.nextLong();
-        }
-
-        for (int i = 0; i < threads.length; i++) {
-            threads[i] = new MyThread(msg[i], time[i]);
-            threads[i].start();
-        }
-        new CheckThread(threads).start();
-    }
-}
 
