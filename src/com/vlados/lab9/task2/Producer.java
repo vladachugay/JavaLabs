@@ -16,7 +16,7 @@ public class Producer implements Runnable{
         while (true) {
             str = generateRandomString();
             buffer.add(str);
-            System.out.println(Thread.currentThread().getName() + " generated string: " + str);
+            System.out.println(Thread.currentThread().getName() + " has generated string: " + str);
         }
     }
 
