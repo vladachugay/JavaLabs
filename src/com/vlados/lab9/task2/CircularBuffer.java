@@ -3,9 +3,9 @@ package com.vlados.lab9.task2;
 import java.util.concurrent.locks.*;
 
 public class CircularBuffer {
-    private Lock accessLock = new ReentrantLock();
-    private Condition canWrite = accessLock.newCondition();
-    private Condition canRead = accessLock.newCondition();
+    private final Lock accessLock = new ReentrantLock();
+    private final Condition canWrite = accessLock.newCondition();
+    private final Condition canRead = accessLock.newCondition();
     private int size;
     private String[] buffer;
     private int occupiedBuffers = 0;   //кількість зайнятих позицій в буфері
