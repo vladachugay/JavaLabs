@@ -1,9 +1,12 @@
 package com.vlados.lab3.main.controllers;
+
 import com.vlados.lab3.main.models.Validator;
 import com.vlados.lab3.main.models.services.IOService;
 import com.vlados.lab3.main.models.services.ShapeService;
 import com.vlados.lab3.main.view.RetrieveInfo;
 import com.vlados.lab3.main.view.View;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
