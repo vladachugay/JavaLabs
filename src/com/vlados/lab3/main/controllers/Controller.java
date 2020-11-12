@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class Controller {
@@ -21,10 +23,13 @@ public class Controller {
     private static final View view = new View();
     private static final Validator validator = new Validator();
     private static final RetrieveInfo info = new RetrieveInfo();
+    private static final Logger logger = LogManager.getLogger(Controller.class);
 
     public void start() {
         while (true) {
             view.showMessage(ResourceBundleKeys.MAIN_MENU);
+            logger.debug("main menu");
+            logger.error("error");
             String choice = info.retrieveUsersLine();
             switch (choice.trim()) {
                 case "1" -> this.addShape(info.retrieveType());

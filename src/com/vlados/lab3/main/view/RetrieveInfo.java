@@ -16,7 +16,7 @@ public class RetrieveInfo {
 
     public String retrieveType() {
         String type;
-        view.showMessage(View.INVITATION_TO_ENTER_TYPE);
+        view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_TYPE);
         while (true) {
             try {
                 type = validator.checkString(retrieveUsersLine()).toLowerCase();
@@ -25,7 +25,7 @@ public class RetrieveInfo {
                     throw new IllegalArgumentException();
                 }
             } catch (IllegalArgumentException exception) {
-                view.showMessage(View.INCORRECT_INPUT);
+                view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
                 continue;
             }
             break;
@@ -35,12 +35,12 @@ public class RetrieveInfo {
 
     public String retrieveColor() {
         String color;
-        view.showMessage(View.INVITATION_TO_ENTER_COLOR);
+        view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_COLOR);
         while (true) {
             try {
                 color = validator.checkString(retrieveUsersLine());
             } catch (IllegalArgumentException exception) {
-                view.showMessage(View.INCORRECT_INPUT);
+                view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
                 continue;
             }
             break;
@@ -54,18 +54,18 @@ public class RetrieveInfo {
         File file;
         while (true) {
             try {
-                view.showMessage(View.INVITATION_TO_ENTER_FILE_LOCATION);
+                view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_FILE_LOCATION);
                 path = validator.checkString(retrieveUsersLine());
-                view.showMessage(View.INVITATION_TO_ENTER_FILENAME);
+                view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_FILENAME);
                 filename = validator.checkString(retrieveUsersLine());
             }
             catch (IllegalArgumentException exception) {
-                view.showMessage(View.INCORRECT_INPUT);
+                view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
                 continue;
             }
             file = new File(path, filename);
             if(file.exists()) break;
-            else view.showMessage(View.INCORRECT_FILE);
+            else view.showMessage(ResourceBundleKeys.INCORRECT_FILE);
         }
         return file;
     }

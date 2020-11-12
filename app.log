@@ -1,0 +1,8 @@
+2020-11-13 00:12:55,727 DEBUG c.v.l.m.c.Controller [main] main menu 
+2020-11-13 00:12:55,729 ERROR c.v.l.m.c.Controller [main] error 
+2020-11-13 00:13:44,374 DEBUG c.v.l.m.c.Controller [main] main menu 
+2020-11-13 00:13:44,378 ERROR c.v.l.m.c.Controller [main] error 
+2020-11-13 00:15:40,426 DEBUG c.v.l.m.c.Controller [main] main menu 
+2020-11-13 00:15:40,428 ERROR c.v.l.m.c.Controller [main] error 
+[2020-11-13 00:16:28] DEBUG [Controller:31] - main menu
+[2020-11-13 00:16:28] ERROR [Controller:32] - error
