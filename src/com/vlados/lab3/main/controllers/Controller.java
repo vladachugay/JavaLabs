@@ -3,6 +3,7 @@ package com.vlados.lab3.main.controllers;
 import com.vlados.lab3.main.models.Validator;
 import com.vlados.lab3.main.models.services.IOService;
 import com.vlados.lab3.main.models.services.ShapeService;
+import com.vlados.lab3.main.view.ResourceBundleKeys;
 import com.vlados.lab3.main.view.RetrieveInfo;
 import com.vlados.lab3.main.view.View;
 
@@ -10,6 +11,8 @@ import com.vlados.lab3.main.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
 
 
 public class Controller {
@@ -21,14 +24,14 @@ public class Controller {
 
     public void start() {
         while (true) {
-            view.showMessage(View.MAIN_MENU);
+            view.showMessage(ResourceBundleKeys.MAIN_MENU);
             String choice = info.retrieveUsersLine();
             switch (choice.trim()) {
                 case "1" -> this.addShape(info.retrieveType());
                 case "2" -> shapeService.autofill();
                 case "3" -> view.showShapes(shapeService.getShapes());
                 case "4" -> {
-                    view.showMessage(View.SUM_AREA);
+                    view.showMessage(ResourceBundleKeys.SUM_AREA);
                     view.showMessage(String.valueOf(shapeService.sumAreaForAllShapes()));
                 }
                 case "5" -> this.sumAreaForType(info.retrieveType());
@@ -42,8 +45,9 @@ public class Controller {
                 }
                 case "8" -> ioservice.writeShapes(shapeService.getShapes(), info.retrieveFile());
                 case "9" -> ioservice.readShapes(info.retrieveFile(), shapeService.getShapes());
-                case "10" -> System.exit(1);
-                default -> view.showMessage(View.INCORRECT_INPUT);
+                case "10" -> this.changeLanguage();
+                case "11" -> System.exit(1);
+                default -> view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
             }
         }
     }
@@ -53,13 +57,13 @@ public class Controller {
         float side;
         switch (type) {
             case "triangle" -> {
-                view.showMessage(View.INVITATION_TO_ENTER_TRIANGLE);
+                view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_TRIANGLE);
                 while (sides.size() < 3) {
                     while (true) {
                         try {
                             side = validator.checkNumber(info.retrieveUsersLine());
                         } catch (IllegalArgumentException exception) {
-                            view.showMessage(View.INCORRECT_INPUT);
+                            view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
                             continue;
                         }
                         sides.add(side);
@@ -71,13 +75,13 @@ public class Controller {
             }
             case "rectangle" -> {
                 float a;
-                view.showMessage(View.INVITATION_TO_ENTER_RECTANGLE);
+                view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_RECTANGLE);
                 while (sides.size() < 2) {
                     while (true) {
                         try {
                             side = validator.checkNumber(info.retrieveUsersLine());
                         } catch (IllegalArgumentException exception) {
-                            view.showMessage(View.INCORRECT_INPUT);
+                            view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
                             continue;
                         }
                         sides.add(side);
@@ -88,19 +92,19 @@ public class Controller {
                 sides.clear();
             }
             case "circle" -> {
-                view.showMessage(View.INVITATION_TO_ENTER_CIRCLE);
+                view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_CIRCLE);
                 while (true) {
                     try {
                         side = validator.checkNumber(info.retrieveUsersLine());
                     } catch (IllegalArgumentException exception) {
-                        view.showMessage(View.INCORRECT_INPUT);
+                        view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
                         continue;
                     }
                     break;
                 }
                 shapeService.addCircle(side, info.retrieveColor());
             }
-            default -> view.showMessage(View.INCORRECT_INPUT);
+            default -> view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
         }
     }
 
@@ -108,17 +112,27 @@ public class Controller {
     public void sumAreaForType(String type) {
         switch (type) {
             case "circle" -> {
-                view.showMessage(View.SUM_AREA_CIRCLE);
+                view.showMessage(ResourceBundleKeys.SUM_AREA_CIRCLE);
                 view.showMessage(String.valueOf(shapeService.sumAreaForSomeShapes("Circle")));
             }
             case "triangle" -> {
-                view.showMessage(View.SUM_AREA_TRIANGLE);
+                view.showMessage(ResourceBundleKeys.SUM_AREA_TRIANGLE);
                 view.showMessage(String.valueOf(shapeService.sumAreaForSomeShapes("Triangle")));
             }
             case "rectangle" -> {
-                view.showMessage(View.SUM_AREA_RECTANGLE);
+                view.showMessage(ResourceBundleKeys.SUM_AREA_RECTANGLE);
                 view.showMessage(String.valueOf(shapeService.sumAreaForSomeShapes("Rectangle")));
             }
+        }
+    }
+
+    public void changeLanguage() {
+        view.showMessage(ResourceBundleKeys.LANGUAGE_MENU);
+        String choice = info.retrieveUsersLine();
+        switch (choice) {
+            case "2" -> view.setLocale(new Locale("uk", "UA"));
+            case "3" -> view.setLocale(new Locale("ru", "RU"));
+            default -> view.setLocale(new Locale("en", "GB"));
         }
     }
 }
