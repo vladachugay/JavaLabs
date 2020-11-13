@@ -12,7 +12,6 @@ import com.vlados.lab3.main.view.View;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,31 +27,61 @@ public class Controller {
     public void start() {
         while (true) {
             view.showMessage(ResourceBundleKeys.MAIN_MENU);
-            logger.debug("main menu");
-            logger.error("error");
+            logger.debug("Main menu");
+            logger.trace("trace");
             String choice = info.retrieveUsersLine();
             switch (choice.trim()) {
-                case "1" -> this.addShape(info.retrieveType());
-                case "2" -> shapeService.autofill();
-                case "3" -> view.showShapes(shapeService.getShapes());
+                case "1" -> {
+                    logger.info("User chose to add shape.");
+                    this.addShape(info.retrieveType());
+                }
+                case "2" -> {
+                    logger.info("User chose to autofill shapes.");
+                    shapeService.autofill();
+                }
+                case "3" -> {
+                    logger.info("User chose to show add shapes.");
+                    view.showShapes(shapeService.getShapes());
+                }
                 case "4" -> {
+                    logger.info("User chose to sum all shape areas.");
                     view.showMessage(ResourceBundleKeys.SUM_AREA);
                     view.showMessage(String.valueOf(shapeService.sumAreaForAllShapes()));
                 }
-                case "5" -> this.sumAreaForType(info.retrieveType());
+                case "5" -> {
+                    logger.info("User chose to sum some shape type areas.");
+                    this.sumAreaForType(info.retrieveType());
+                }
                 case "6" -> {
+                    logger.info("User chose to sort shapes by area.");
                     shapeService.sortByArea(shapeService.getShapes());
                     view.showShapes(shapeService.getShapes());
                 }
                 case "7" -> {
+                    logger.info("User chose to sort shapes by color.");
                     shapeService.sortByColor(shapeService.getShapes());
                     view.showShapes(shapeService.getShapes());
                 }
-                case "8" -> ioservice.writeShapes(shapeService.getShapes(), info.retrieveFile());
-                case "9" -> ioservice.readShapes(info.retrieveFile(), shapeService.getShapes());
-                case "10" -> this.changeLanguage();
-                case "11" -> System.exit(1);
-                default -> view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
+                case "8" -> {
+                    logger.info("User chose to write shapes to some file.");
+                    ioservice.writeShapes(shapeService.getShapes(), info.retrieveFile());
+                }
+                case "9" -> {
+                    logger.info("User chose to read shapes from some file.");
+                    ioservice.readShapes(info.retrieveFile(), shapeService.getShapes());
+                }
+                case "10" -> {
+                    logger.info("User chose to change language.");
+                    this.changeLanguage();
+                }
+                case "11" -> {
+                    logger.info("User exited the program.");
+                    System.exit(1);
+                }
+                default -> {
+                    logger.error("Incorrect choice in the main menu.");
+                    view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
+                }
             }
         }
     }
@@ -62,12 +91,15 @@ public class Controller {
         float side;
         switch (type) {
             case "triangle" -> {
+                logger.info("User chose to add triangle.");
                 view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_TRIANGLE);
+                logger.info("User received invitation to enter 3 sides of triangle.");
                 while (sides.size() < 3) {
                     while (true) {
                         try {
                             side = validator.checkNumber(info.retrieveUsersLine());
                         } catch (IllegalArgumentException exception) {
+                            logger.error("Incorrect input");
                             view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
                             continue;
                         }
@@ -76,16 +108,19 @@ public class Controller {
                     }
                 }
                 shapeService.addTriangle(sides.get(0), sides.get(1), sides.get(2), info.retrieveColor());
+                logger.info("Triangle was added.");
                 sides.clear();
             }
             case "rectangle" -> {
                 float a;
                 view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_RECTANGLE);
+                logger.info("User received invitation to enter 2 sides of rectangle.");
                 while (sides.size() < 2) {
                     while (true) {
                         try {
                             side = validator.checkNumber(info.retrieveUsersLine());
                         } catch (IllegalArgumentException exception) {
+                            logger.error("Incorrect input");
                             view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
                             continue;
                         }
@@ -94,22 +129,29 @@ public class Controller {
                     }
                 }
                 shapeService.addRectangle(sides.get(0), sides.get(1), info.retrieveColor());
+                logger.info("Rectangle was added.");
                 sides.clear();
             }
             case "circle" -> {
                 view.showMessage(ResourceBundleKeys.INVITATION_TO_ENTER_CIRCLE);
+                logger.info("User received invitation to radius of circle.");
                 while (true) {
                     try {
                         side = validator.checkNumber(info.retrieveUsersLine());
                     } catch (IllegalArgumentException exception) {
+                        logger.error("Incorrect input");
                         view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
                         continue;
                     }
                     break;
                 }
                 shapeService.addCircle(side, info.retrieveColor());
+                logger.info("Circle was added.");
             }
-            default -> view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
+            default -> {
+                logger.error("Incorrect type of shape");
+                view.showMessage(ResourceBundleKeys.INCORRECT_INPUT);
+            }
         }
     }
 
@@ -133,6 +175,7 @@ public class Controller {
 
     public void changeLanguage() {
         view.showMessage(ResourceBundleKeys.LANGUAGE_MENU);
+        logger.info("User received invitation to choose language to change.");
         String choice = info.retrieveUsersLine();
         switch (choice) {
             case "2" -> view.setLocale(new Locale("uk", "UA"));
